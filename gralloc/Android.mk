@@ -43,6 +43,10 @@ LOCAL_C_INCLUDES := \
 	$(TOP)/hardware/samsung_slsi-linaro/exynos/include \
 	$(TOP)/hardware/samsung_slsi-linaro/exynos5/include
 
+ifneq ($(strip $(BOARD_EXYNOS_GRALLOC_INCLUDE_DIR)),)
+LOCAL_C_INCLUDES := $(BOARD_EXYNOS_GRALLOC_INCLUDE_DIR) $(LOCAL_C_INCLUDES)
+endif
+
 LOCAL_SRC_FILES := 	\
 	format_chooser.cpp \
 	gralloc.cpp 	\
@@ -82,6 +86,10 @@ LOCAL_C_INCLUDES := \
 	$(TOP)/hardware/samsung_slsi-linaro/exynos/include \
 	$(TOP)/hardware/samsung_slsi-linaro/exynos5/include \
 	$(TOP)/system/core/libsync/include
+
+ifneq ($(strip $(BOARD_EXYNOS_GRALLOC_INCLUDE_DIR)),)
+LOCAL_C_INCLUDES := $(BOARD_EXYNOS_GRALLOC_INCLUDE_DIR) $(LOCAL_C_INCLUDES)
+endif
 
 LOCAL_SRC_FILES := 	\
 	GrallocWrapper.cpp

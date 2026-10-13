@@ -40,7 +40,9 @@
 /* Exynos specific ION allocation flag */
 #define ION_FLAG_PRESERVE_KMAP  4
 #define ION_FLAG_NOZEROED       8
+#ifndef ION_FLAG_PROTECTED
 #define ION_FLAG_PROTECTED      16
+#endif
 #define ION_FLAG_SYNC_FORCE     32
 #define ION_FLAG_MAY_HWRENDER   64
 

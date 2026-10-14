@@ -1,0 +1,85 @@
+// Copyright (C) 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+
+soong_config_module_type {
+    name: "exynos_legacy_cc_defaults",
+    module_type: "cc_defaults",
+    config_namespace: "exynos_legacy",
+    list_variables: [
+        "cflags",
+        "include_dirs",
+        "gralloc_cflags",
+        "gralloc_include_dirs",
+        "display_extra_srcs",
+    ],
+    value_variables: [
+        "soc_base",
+    ],
+    properties: [
+        "cflags",
+        "include_dirs",
+        "srcs",
+    ],
+}
+
+soong_config_module_type {
+    name: "exynos_legacy_cc_library_shared",
+    module_type: "cc_library_shared",
+    config_namespace: "exynos_legacy",
+    value_variables: [
+        "platform",
+        "bootloader_board",
+    ],
+    properties: [
+        "name",
+    ],
+}
+
+exynos_legacy_cc_defaults {
+    name: "exynos_legacy_board_defaults",
+    vendor: true,
+    soong_config_variables: {
+        cflags: {
+            cflags: [
+                "%s",
+            ],
+        },
+        include_dirs: {
+            include_dirs: [
+                "%s",
+            ],
+        },
+    },
+}
+
+exynos_legacy_cc_defaults {
+    name: "exynos_legacy_gralloc_defaults",
+    vendor: true,
+    enabled: select(soong_config_variable("exynos_legacy", "gralloc0"), {
+        "true": true,
+        default: false,
+    }),
+    header_libs: [
+        "libhardware_headers",
+        "device_kernel_headers",
+    ],
+    soong_config_variables: {
+        gralloc_cflags: {
+            cflags: [
+                "%s",
+            ],
+        },
+        gralloc_include_dirs: {
+            include_dirs: [
+                "%s",
+            ],
+        },
+    },
+}
+
+filegroup {
+    name: "exynos_legacy_gralloc_wrapper_srcs",
+    srcs: [
+        "gralloc/GrallocWrapper.cpp",
+    ],
+}

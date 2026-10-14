@@ -36,6 +36,7 @@
 #include <linux/ion.h>
 #include <exynos_ion.h>
 #include "gralloc_priv.h"
+#include "exynos_gralloc_usage.h"
 #include "exynos_format.h"
 
 #include "VendorVideoAPI.h"

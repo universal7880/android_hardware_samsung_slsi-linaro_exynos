@@ -1,15 +1,24 @@
-
 cc_library_shared {
     name: "libGrallocWrapper",
     vendor: true,
 
     srcs: select(soong_config_variable("arm_gralloc", "gralloc_version"), {
+        "none": [":exynos_legacy_gralloc_wrapper_srcs"],
         "one": ["gralloc1/GrallocWrapper.cpp"],
         "three": ["gralloc3/GrallocWrapper.cpp"],
         default: [],
     }),
 
-    include_dirs: select(soong_config_variable("arm_gralloc", "gralloc_version"), {
+    include_dirs: select(soong_config_variable("exynos_legacy", "gralloc_include_dir"), {
+        any @ dir: [dir],
+        default: [],
+    }) + select(soong_config_variable("arm_gralloc", "gralloc_version"), {
+        "none": [
+            "hardware/samsung_slsi-linaro/exynos/legacy/include",
+            "hardware/samsung_slsi-linaro/exynos/include",
+            "hardware/samsung_slsi-linaro/exynos5/include",
+            "system/core/libsync/include",
+        ],
         "one": [
             "hardware/samsung_slsi-linaro/exynos/include",
             "hardware/samsung_slsi-linaro/exynos5/include",
@@ -21,6 +30,10 @@ cc_library_shared {
         default: [],
     }),
 
+    header_libs: select(soong_config_variable("arm_gralloc", "gralloc_version"), {
+        "none": ["device_kernel_headers"],
+        default: [],
+    }),
     shared_libs: [
         "liblog",
         "libcutils",
@@ -31,5 +44,8 @@ cc_library_shared {
         "libsync",
         "libhardware",
         "libhidlbase",
-    ],
+    ] + select(soong_config_variable("arm_gralloc", "gralloc_version"), {
+        "none": ["libion"],
+        default: [],
+    }),
 }

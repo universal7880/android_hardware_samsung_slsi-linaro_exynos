@@ -1,0 +1,49 @@
+// Copyright (C) 2026 The LineageOS Project
+// SPDX-License-Identifier: Apache-2.0
+
+soong_namespace {
+    imports: [
+        "hardware/samsung_slsi-linaro/exynos",
+        "hardware/samsung_slsi-linaro/graphics",
+    ],
+}
+
+soong_config_module_type_import {
+    from: "hardware/samsung_slsi-linaro/exynos/legacy/Android.bp",
+    module_types: [
+        "exynos_legacy_cc_library_shared",
+    ],
+}
+
+exynos_legacy_cc_library_shared {
+    name: "gralloc.target_board_platform",
+    defaults: [
+        "exynos_legacy_gralloc_defaults",
+    ],
+    cflags: [
+        "-DLOG_TAG=\"gralloc\"",
+        "-Wno-missing-field-initializers",
+        "-DMALI_AFBC_GRALLOC=1",
+    ],
+    relative_install_path: "hw",
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libion_exynos",
+        "libutils",
+        "libsync",
+        "libhardware",
+        "libion",
+    ],
+    srcs: [
+        "format_chooser.cpp",
+        "gralloc.cpp",
+        "framebuffer.cpp",
+        "mapper.cpp",
+    ],
+    soong_config_variables: {
+        platform: {
+            name: "gralloc.%s",
+        },
+    },
+}

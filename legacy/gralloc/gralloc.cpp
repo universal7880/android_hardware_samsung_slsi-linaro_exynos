@@ -37,6 +37,7 @@
 #include <hardware/gralloc.h>
 
 #include "gralloc_priv.h"
+#include "exynos_gralloc_usage.h"
 #include "exynos_format.h"
 #include "gr.h"
 

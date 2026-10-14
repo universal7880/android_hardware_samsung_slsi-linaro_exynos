@@ -36,8 +36,11 @@ endif
 
 ifeq ($(BOARD_USES_EXYNOS5_COMMON_GRALLOC), true)
 ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION), 0)
-common_exynos_dirs += \
-    gralloc
+ifeq ($(BOARD_USES_LEGACY_GRALLOC), true)
+common_exynos_dirs += legacy/gralloc
+else
+common_exynos_dirs += gralloc
+endif
 endif
 ifeq ($(BOARD_USES_EXYNOS_GRALLOC_VERSION), 1)
 common_exynos_dirs += \

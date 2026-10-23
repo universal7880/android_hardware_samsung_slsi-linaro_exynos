@@ -6,9 +6,7 @@ soong_config_module_type {
     module_type: "cc_defaults",
     config_namespace: "exynos_legacy",
     list_variables: [
-        "cflags",
         "include_dirs",
-        "gralloc_cflags",
         "gralloc_include_dirs",
         "display_extra_srcs",
     ],
@@ -37,13 +35,12 @@ soong_config_module_type {
 
 exynos_legacy_cc_defaults {
     name: "exynos_legacy_board_defaults",
+    cflags: select(soong_config_variable("exynos_legacy", "cflags"), {
+        any @ flags: flags,
+        default: [],
+    }),
     vendor: true,
     soong_config_variables: {
-        cflags: {
-            cflags: [
-                "%s",
-            ],
-        },
         include_dirs: {
             include_dirs: [
                 "%s",
@@ -54,6 +51,10 @@ exynos_legacy_cc_defaults {
 
 exynos_legacy_cc_defaults {
     name: "exynos_legacy_gralloc_defaults",
+    cflags: select(soong_config_variable("exynos_legacy", "gralloc_cflags"), {
+        any @ flags: flags,
+        default: [],
+    }),
     vendor: true,
     enabled: select(soong_config_variable("exynos_legacy", "gralloc0"), {
         "true": true,
@@ -64,11 +65,6 @@ exynos_legacy_cc_defaults {
         "device_kernel_headers",
     ],
     soong_config_variables: {
-        gralloc_cflags: {
-            cflags: [
-                "%s",
-            ],
-        },
         gralloc_include_dirs: {
             include_dirs: [
                 "%s",

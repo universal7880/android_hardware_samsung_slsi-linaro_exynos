@@ -48,7 +48,7 @@ cc_defaults {
     }),
     header_libs: [
         "libhardware_headers",
-        "device_kernel_headers",
+        "//hardware/samsung_slsi-linaro/exynos:exynos_bsp_kernel_headers",
     ],
     include_dirs: select(soong_config_variable("exynos_legacy", "gralloc_include_dirs"), {
         any @ dirs: dirs,

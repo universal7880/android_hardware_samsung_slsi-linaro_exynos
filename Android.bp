@@ -50,4 +50,12 @@ cc_library_headers {
     proprietary: true,
 }
 
+// Exynos BSP sources use the layout selected by TARGET_BOARD_KERNEL_HEADERS.
+kernel_headers {
+    name: "exynos_bsp_kernel_headers",
+    vendor: true,
+    recovery_available: true,
+    min_sdk_version: "apex_inherit",
+}
+
 subdirs = ["*"]

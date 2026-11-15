@@ -30,7 +30,7 @@ cc_library_shared {
     ],
 
     header_libs: [
-        "device_kernel_headers",
+        "//hardware/samsung_slsi-linaro/exynos:exynos_bsp_kernel_headers",
     ],
 
     include_dirs: ["hardware/samsung_slsi-linaro/exynos/include"],

@@ -39,6 +39,6 @@ cc_library_shared {
         "exynos_format_v4l2.c",
     ],
     header_libs: [
-        "device_kernel_headers",
+        "//hardware/samsung_slsi-linaro/exynos:exynos_bsp_kernel_headers",
     ],
 }
